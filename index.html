@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oracle Part2</title>
+    <style>
+        body {
+            background: linear-gradient(45deg, #d3d3d3, #888888, #ffffff);
+            background-size: 200% 200%;
+            animation: gradient 5s ease infinite;
+            font-family: Arial, sans-serif;
+            color: white;
+            text-align: center;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .container {
+            width: 80%;
+            max-width: 600px;
+            padding: 20px;
+            background-color: rgba(213, 204, 217, 0.7); 
+            border-radius: 10px;
+            margin-top: -200px; 
+        }
+
+        h1 {
+            font-size: 2.5em;
+        }
+
+        .input-container {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .input-container input {
+            padding: 10px;
+            font-size: 1em;
+            width: 45%;
+        }
+
+        .input-container button {
+            padding: 10px 20px;
+            font-size: 1em;
+            background-color: #555;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .input-container button:hover {
+            background-color: #777;
+        }
+
+        .image-container {
+            margin-top: 30px;
+        }
+
+        .image-box {
+            width: 300px;
+            height: 300px;
+            background-color: #222;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 10px;
+            margin: 0 auto;
+        }
+
+        .image-box img {
+            max-width: 100%;
+            max-height: 100%;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Enter randomly and see what picture it is!</h1>
+        <div class="input-container">
+            <input type="text" id="letterInput" placeholder="Enter Number (R, Y, B)">
+            <input type="number" id="numberInput" placeholder="Enter Letter (1-4)" min="1" max="4">
+            <button onclick="generateImage()">Next</button>
+        </div>
+
+        <div class="image-container" id="imageContainer">
+        </div>
+    </div>
+
+    <script>
+        function generateImage() {
+            const letter = document.getElementById("letterInput").value.toUpperCase();
+            const number = document.getElementById("numberInput").value;
+
+            if (!['R', 'Y', 'B'].includes(letter) || number < 1 || number > 4) {
+                alert("Please enter valid letters and numbers");
+                return;
+            }
+
+            const imageContainer = document.getElementById("imageContainer");
+            imageContainer.innerHTML = ''; 
+
+            const imgBox = document.createElement('div');
+            imgBox.classList.add('image-box');
+            
+            const img = document.createElement('img');
+            img.src = `images/${letter}${number}.jpeg`; 
+            imgBox.appendChild(img);
+            
+            imageContainer.appendChild(imgBox);
+        }
+    </script>
+</body>
+</html>
